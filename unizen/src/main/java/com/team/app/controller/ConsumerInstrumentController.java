@@ -90,6 +90,7 @@ public class ConsumerInstrumentController {
 	@RequestMapping(value = "/mobileLoginAuth", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> userLoginFromApp(@RequestBody String received){
 		logger.info("Inside in /mobileLoginAuth ");
+		logger.info("/mobileLoginAuth ");
 
 		JSONObject obj=null;
 		ResponseEntity<String> responseEntity = null;
