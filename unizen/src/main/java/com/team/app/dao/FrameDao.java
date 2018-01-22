@@ -33,13 +33,13 @@ public interface FrameDao extends JpaRepository<LoraFrame, Serializable> {
 	@Query("Select f from LoraFrame f where f.deviceId=:deviceId and f.nodeName=:nodeName order by id desc")
 	List<LoraFrame> getFrameByDevId(@Param("deviceId") String deviceId,@Param("nodeName") String nodeName);
 
-	@Query("Select f from LoraFrame f where f.deviceId=:deviceId and f.nodeName=:nodeName")
-	List<LoraFrame> getFramesByNodeNameAndID(@Param("deviceId") String deviceId,@Param("nodeName") String nodeName);
+	@Query("Select f from LoraFrame f where f.deviceId=:deviceId and f.devEUI=:devEUI")
+	List<LoraFrame> getFramesByNodeNameAndID(@Param("deviceId") String deviceId,@Param("devEUI") String devEUI);
 		
 	@Modifying
-	@Query(value="UPDATE lora_frames f SET f.central=?1 ,f.peripheral=?2 WHERE f.DeviceId=?3 and f.nodeName=?4",nativeQuery = true)
+	@Query(value="UPDATE lora_frames f SET f.central=?1 ,f.peripheral=?2, f.nodeName=?3 WHERE f.DeviceId=?4 and f.devEUI=?5",nativeQuery = true)
 	@Transactional
-	void setUpdateLoraFrames(@Param("central") String central,@Param("peripheral") String peripheral,@Param("deviceId") String deviceId, @Param("nodeName") String nodeName);
+	void setUpdateLoraFrames(@Param("central") String central,@Param("peripheral") String peripheral, @Param("devEUI") String devEUI,@Param("deviceId") String deviceId, @Param("nodeName") String nodeName);
 
 	@Query(value="Select f.id, round(avg(f.Temperature)), round(avg(f.Pressure)), round(avg(f.Humidity)) from lora_frames f where f.created_at>=?1 and f.nodeName=?2 and f.DeviceId=?3 ",nativeQuery = true)
 	List<Object[]> getFramesByReqDt(@Param("createdAt") Date createdAt, @Param("nodeName") String nodeName, @Param("deviceId") String deviceId);
@@ -53,6 +53,11 @@ public interface FrameDao extends JpaRepository<LoraFrame, Serializable> {
 
 	@Query(value="Select f.* from lora_frames f where f.DeviceId=?1 and f.nodeName=?2 and f.central!='null' and f.peripheral!='null' order by id desc limit 1",nativeQuery = true)
 	LoraFrame getNamingPacket(@Param("deviceId") String deviceId, @Param("nodeName") String nodeName);
+	
+	@Modifying
+	@Query(value="UPDATE lora_frames f SET f.nodeName=?1 WHERE f.devEUI=?2", nativeQuery = true)
+	@Transactional
+	void setUpdateNodeName(@Param("nodeName") String nodeName, @Param("devEUI") String devEUI);
 	
 	
 

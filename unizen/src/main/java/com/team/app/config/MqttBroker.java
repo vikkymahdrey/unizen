@@ -741,7 +741,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 				if(flag==1){
 					     		 					logger.debug("flag==1 i==5: ",merge);
 					     		 					 merge=merge+String.valueOf(Character.toChars(b));
-					     		 					List<LoraFrame> frmList=consumerInstrumentServiceImpl.getFramesByNodeNameAndID(frame.getDeviceId(),frm.getNodeName());
+					     		 					List<LoraFrame> frmList=consumerInstrumentServiceImpl.getFramesByNodeNameAndID(frame.getDeviceId(),frm.getDevEUI());
 					     		 					if(frmList!=null && !frmList.isEmpty()){
 					     		 						
 					     		 						logger.debug("flag==1 i==5: size ",frmList.size());
@@ -754,20 +754,27 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 							logger.debug("merge IF ",merge+"index "+i);
 					     		 							
 					     		 						}					     		 						
-					     		 						consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId(),frm.getNodeName(),central.trim(),merge.trim());
-					     		 						
+					     		 						//consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId(),frm.getNodeName(),central.trim(),merge.trim());
+					     		 						consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId(),frm.getNodeName(),frm.getDevEUI(),central.trim(),merge.trim());
+
 					     		 						
 					     		 					}else{
 					     		 						
 					     		 					}
 					     		 				}else{
-					     		 					 LoraFrame namingList=consumerInstrumentServiceImpl.getNamingPacket(frame.getDeviceId(),frm.getNodeName());
+					     		 					 LoraFrame namingList=consumerInstrumentServiceImpl.getNamingPacket(frame.getDeviceId(),frm.getDevEUI());
 						     		 					 if(namingList!=null){
 						     		 						 logger.debug("Naming Packet Named");
 						     		 						 logger.debug("Central Naming Packet Named",namingList.getCentral());
 						     		 						 logger.debug("Pheripheral Naming Packet Named",namingList.getPeripheral());
 						     		 						frame.setCentral(namingList.getCentral()); 
 						     		 						frame.setPeripheral(namingList.getPeripheral());
+						     		 						if(!frm.getNodeName().equalsIgnoreCase(namingList.getNodeName())){
+						     		 							logger.debug("Loraserver node name has changed");
+						     		 							consumerInstrumentServiceImpl.setUpdateNodeName(frm.getNodeName(),frm.getDevEUI());
+						     		 						}
+						     		 							
+
 						     		 					 }
 					     		 					 
 							     		 			 int humidity=Integer.parseInt(decodeBinary,2);

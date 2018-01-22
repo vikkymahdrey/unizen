@@ -295,7 +295,8 @@ public class ConsumerInstrumentController {
     						  //httpHeaders.add(AppConstants.HTTP_HEADER_JWT_TOKEN,jwt);
     						  //mqttIntrf.doDemo();
     						  dto.setStatusDesc("Successfully login");
-    						  dto.setJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJhdWQiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJuYmYiOjE1MDk5NjE1NzIsInN1YiI6InVzZXIiLCJ1c2VybmFtZSI6ImFkbWluIn0.NDZGFGPDQNs7AgmGRzQk1WL5Y1tLjyRbw-n_TwHPZsY");
+    						  //dto.setJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJhdWQiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJuYmYiOjE1MDk5NjE1NzIsInN1YiI6InVzZXIiLCJ1c2VybmFtZSI6ImFkbWluIn0.NDZGFGPDQNs7AgmGRzQk1WL5Y1tLjyRbw-n_TwHPZsY");
+    						  dto.setJwt(jwt);
     						  String resp = JsonUtil.objToJson(dto);
     						  responseEntity = new ResponseEntity<String>(resp,HttpStatus.OK);
     					 }else{
@@ -2033,7 +2034,209 @@ public class ConsumerInstrumentController {
 	
 	
 	
-	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@RequestMapping(value = "/resetPasscode", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> setResetPasscode(@RequestBody String received,@RequestHeader(value = AppConstants.HTTP_HEADER_JWT_TOKEN) String jwt){
+		logger.info("Inside in /resetPasscode ");
+		logger.info("/resetPasscode body",received);
+		ResponseEntity<String> responseEntity = null;
+		Status status=null;
+				status=new Status();
+				JSONObject obj=null;	
+
+				try{		
+						obj=new JSONObject();
+						obj=(JSONObject)new JSONParser().parse(received);
+				}catch(Exception e){
+					return new ResponseEntity<String>("Empty received body /resetPasscode", HttpStatus.BAD_REQUEST);
+				}
+				
+		try{			
+
+			 				
+    				
+    				
+    				
+    			
+			
+			logger.debug("JWT TOken ",jwt);
+			if( jwt!=null && !jwt.isEmpty()){				
+				if( obj.get("deviceId").toString()!=null && !obj.get("deviceId").toString().isEmpty() &&
+						obj.get("devEUI").toString()!=null && !obj.get("devEUI").toString().isEmpty() &&
+							obj.get("fPort").toString()!=null && !obj.get("fPort").toString().isEmpty() ){	    					
+	    				logger.debug("deviceId for /resetPasscode :",obj.get("deviceId").toString());
+	    				logger.debug("devEUI for /resetPasscode :",obj.get("devEUI").toString());
+	    				logger.debug("fPort for /resetPasscode :",obj.get("fPort").toString());
+	    				
+	    				String deviceId=obj.get("deviceId").toString();
+	    				String devEUI=obj.get("devEUI").toString();
+	    				String fPortStr=obj.get("fPort").toString();
+															
+																		
+											String dId=deviceId.substring(0,2);
+											String dIdLed12=deviceId.substring(2);
+											logger.debug("/dIdLed12 printing ",dIdLed12);
+											logger.debug("/dIdLed12+0 printing ",Byte.valueOf(dIdLed12+"0"));
+											
+											byte hexDevId=(byte) Integer.parseInt(dId,16);
+											int n=0;
+											if(hexDevId<0){
+												n=256+(int)hexDevId;
+											}else{
+												n=(int)hexDevId;
+											}
+											
+											
+											logger.debug("/Actual deviceId ",n);
+											
+											byte hexDIdLed12=(byte) Integer.parseInt(dIdLed12+"0",16);
+											int p=0;
+											if (hexDIdLed12<0){
+												p=256+(int)hexDIdLed12;
+											}else{
+												p=(int)hexDIdLed12;
+											}
+																						
+												String command="13";
+												String byteVal="-1";
+												logger.debug("/command as ",Byte.valueOf(command));
+												byte[] byteArr = new byte[40];											
+												byteArr[0]=(byte) n;
+												byteArr[1]=(byte) p;
+												byteArr[2]=0;
+												byteArr[3]=0;
+												byteArr[4]=Byte.valueOf(command);
+												byteArr[5]=Byte.valueOf(byteVal);
+												byteArr[6]=Byte.valueOf(byteVal);
+												byteArr[7]=Byte.valueOf(byteVal);
+												byteArr[8]=Byte.valueOf(byteVal);
+												byteArr[9]=Byte.valueOf(byteVal);
+												byteArr[10]=Byte.valueOf(byteVal);
+												byteArr[11]=Byte.valueOf(byteVal);
+												byteArr[12]=Byte.valueOf(byteVal);
+												byteArr[13]=Byte.valueOf(byteVal);
+												byteArr[14]=Byte.valueOf(byteVal);
+												byteArr[15]=Byte.valueOf(byteVal);
+												byteArr[16]=Byte.valueOf(byteVal);
+												byteArr[17]=Byte.valueOf(byteVal);
+												byteArr[18]=Byte.valueOf(byteVal);
+												byteArr[19]=Byte.valueOf(byteVal);
+												byteArr[20]=Byte.valueOf(byteVal);
+												byteArr[21]=Byte.valueOf(byteVal);
+												byteArr[22]=Byte.valueOf(byteVal);
+												byteArr[23]=Byte.valueOf(byteVal);
+												byteArr[24]=Byte.valueOf(byteVal);
+												byteArr[25]=Byte.valueOf(byteVal);
+												byteArr[26]=Byte.valueOf(byteVal);
+												byteArr[27]=Byte.valueOf(byteVal);
+												byteArr[28]=Byte.valueOf(byteVal);
+												byteArr[29]=Byte.valueOf(byteVal);
+												byteArr[30]=Byte.valueOf(byteVal);
+												byteArr[31]=Byte.valueOf(byteVal);
+												byteArr[32]=Byte.valueOf(byteVal);
+												byteArr[33]=Byte.valueOf(byteVal);
+												byteArr[34]=Byte.valueOf(byteVal);
+												byteArr[35]=Byte.valueOf(byteVal);
+												byteArr[36]=Byte.valueOf(byteVal);
+												byteArr[37]=Byte.valueOf(byteVal);
+												byteArr[38]=Byte.valueOf(byteVal);
+												byteArr[39]=Byte.valueOf(byteVal);
+												
+																					
+											logger.debug("/byteArr result printing ",JsonUtil.objToJson(byteArr));
+																				
+											
+								
+								int fPort=0;
+									try{
+										fPort=Integer.parseInt(fPortStr);
+									}catch(Exception e){
+										;
+									}
+									
+							  logger.debug("/fPort printing int ",fPort);
+								
+																	
+							  	logger.debug("/byteArr[0] ",byteArr[0]);
+								logger.debug("/byteArr[1] ",byteArr[1]);
+								logger.debug("/byteArr[2] ",byteArr[2]);
+								logger.debug("/byteArr[3] ",byteArr[3]);
+								logger.debug("/byteArr[4] ",byteArr[4]);	
+								
+								
+								logger.debug("Base64 resultant",Base64.encodeBase64String(byteArr));
+														
+								JSONObject jsonObj=null;
+				    				jsonObj=new JSONObject();
+				    				jsonObj.put("confirmed",true);
+				    				jsonObj.put("data",Base64.encodeBase64String(byteArr));
+				    				jsonObj.put("devEUI",devEUI);
+				    				jsonObj.put("fPort",fPort);
+				    				jsonObj.put("reference","CentralApp");
+				    	
+			    				
+				    				String jsonData=jsonObj.toString(); 
+			    			
+										
+				    					String url="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
+					    				logger.debug("URLConn",url);
+					    				
+					    				URL obj1 = new URL(url);
+					    				HttpURLConnection con = (HttpURLConnection) obj1.openConnection();
+					    				con.setDoOutput(true);
+					    				con.setRequestMethod("POST");
+					    				con.setRequestProperty("accept", "application/json");
+					    				con.setRequestProperty("Content-Type", "application/json");
+					    				con.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+					    				
+					    				OutputStream os = con.getOutputStream();
+					    		        os.write(jsonData.getBytes());
+					    		        os.flush();
+					    		        os.close();
+					    		        
+					    				int responseCode = con.getResponseCode();
+					    					logger.debug("POST Response Code :: " + responseCode);
+					    						logger.debug("POST Response message :: " + con.getResponseMessage());
+					    				
+					    				if(responseCode == HttpURLConnection.HTTP_OK) {
+					    					status.setStatusDesc("downlink for resetPasscode sent to queue successfully");
+							    			status.setStatusCode(HttpStatus.OK.toString());
+											String resp = JsonUtil.objToJson(status);
+											logger.debug("led controlling JSON body ",resp);
+							    			responseEntity = new ResponseEntity<String>(resp,HttpStatus.OK);	
+					    				}else{
+					    					status.setStatusDesc("downlink for resetPasscode failed");
+							    			status.setStatusCode(HttpStatus.NOT_ACCEPTABLE.toString());
+											String resp = JsonUtil.objToJson(status);
+											logger.debug("led controlling JSON body ",resp);
+							    			responseEntity = new ResponseEntity<String>(resp,HttpStatus.NOT_ACCEPTABLE);
+					    				}							
+									
+					
+				}else{
+					logger.debug("deviceId/devEUI/fPort is null or empty");
+					status.setStatusDesc("deviceId/devEUI/fPort is null or empty");
+					status.setStatusCode(HttpStatus.METHOD_NOT_ALLOWED.toString());
+					String resp = JsonUtil.objToJson(status);
+					return new ResponseEntity<String>(resp,HttpStatus.METHOD_NOT_ALLOWED);
+				}
+    		    					
+    		}else{
+    			status.setStatusDesc("Jwt token is empty");
+    			status.setStatusCode(HttpStatus.NOT_ACCEPTABLE.toString());
+				String resp = JsonUtil.objToJson(status);
+				logger.debug("led controlling JSON body ",resp);
+    			responseEntity = new ResponseEntity<String>(resp,HttpStatus.NOT_ACCEPTABLE);
+    		}
+		 				   				
+			
+		}catch(Exception e){
+			logger.error("IN contoller catch block /resetPasscode",e);
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+		}
+		return responseEntity;
+	}
 	
 	
 	
