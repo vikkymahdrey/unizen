@@ -189,7 +189,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 		    }*/
 	  
 	  try {
-	    	logger.debug("/ INside MQTT Broker 4786e6ed00490077 ");
+	    	logger.debug("/ INside MQTT Broker 4786e6ed00490191 ");
 	    	MqttConnectOptions connOpts = new MqttConnectOptions();
 	        connOpts.setUserName("loragw");
 	        connOpts.setPassword("loragw".toCharArray());
@@ -198,19 +198,19 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 	        
 	        client.connect(connOpts);
 	        client.setCallback(this);
-	        client.subscribe("application/6/node/4786e6ed00490077/rx");
+	        client.subscribe("application/6/node/4786e6ed00490191/rx");
 	        MqttMessage message = new MqttMessage();
 	        message.setPayload("sending......."
 	                .getBytes());
-	        client.publish("application/6/node/4786e6ed00490077/tx", message);
+	        client.publish("application/6/node/4786e6ed00490191/tx", message);
 	        System.out.println("Message printing here "+message);
 	        //System.exit(0);
 	    } catch (MqttException e) {
 	        e.printStackTrace();
 	    }
 	         
-	 /* try {
-	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490050 ");	
+	 /*try {
+	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490500 ");	
 	    	MqttConnectOptions connOpts = new MqttConnectOptions();
 	        connOpts.setUserName("loragw");
 	        connOpts.setPassword("loragw".toCharArray());
@@ -219,18 +219,102 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 	        
 	        client.connect(connOpts);
 	        client.setCallback(this);
-	        client.subscribe("application/2/node/4786e6ed00490050/rx");
+	        client.subscribe("application/6/node/4786e6ed00490500/rx");
 	        MqttMessage message = new MqttMessage();
 	        message.setPayload("sending......."
 	                .getBytes());
-	        client.publish("application/2/node/4786e6ed00490050/tx", message);
+	        client.publish("application/6/node/4786e6ed00490500/tx", message);
 	        System.out.println("Message printing here "+message);
 	        //System.exit(0);
 	    } catch (MqttException e) {
 	        e.printStackTrace();
 	    }
+	 
+	 try {
+	    	logger.debug("/ INside MQTT Broker 4786e6ed00490301 ");
+	    	MqttConnectOptions connOpts = new MqttConnectOptions();
+	        connOpts.setUserName("loragw");
+	        connOpts.setPassword("loragw".toCharArray());
+	        connOpts.setCleanSession(true);
+	        client = new MqttClient("tcp://139.59.14.31:1883", MqttClient.generateClientId());
+	        
+	        client.connect(connOpts);
+	        client.setCallback(this);
+	        client.subscribe("application/6/node/4786e6ed00490301/rx");
+	        MqttMessage message = new MqttMessage();
+	        message.setPayload("sending......."
+	                .getBytes());
+	        client.publish("application/6/node/4786e6ed00490301/tx", message);
+	        System.out.println("Message printing here "+message);
+	        //System.exit(0);
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }
+	         
+	 try {
+	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490302 ");	
+	    	MqttConnectOptions connOpts = new MqttConnectOptions();
+	        connOpts.setUserName("loragw");
+	        connOpts.setPassword("loragw".toCharArray());
+	        connOpts.setCleanSession(true);
+	        client = new MqttClient("tcp://139.59.14.31:1883", MqttClient.generateClientId());
+	        
+	        client.connect(connOpts);
+	        client.setCallback(this);
+	        client.subscribe("application/6/node/4786e6ed00490302/rx");
+	        MqttMessage message = new MqttMessage();
+	        message.setPayload("sending......."
+	                .getBytes());
+	        client.publish("application/6/node/4786e6ed00490302/tx", message);
+	        System.out.println("Message printing here "+message);
+	        //System.exit(0);
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }
+	 
+	 try {
+	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490303 ");	
+	    	MqttConnectOptions connOpts = new MqttConnectOptions();
+	        connOpts.setUserName("loragw");
+	        connOpts.setPassword("loragw".toCharArray());
+	        connOpts.setCleanSession(true);
+	        client = new MqttClient("tcp://139.59.14.31:1883", MqttClient.generateClientId());
+	        
+	        client.connect(connOpts);
+	        client.setCallback(this);
+	        client.subscribe("application/6/node/4786e6ed00490303/rx");
+	        MqttMessage message = new MqttMessage();
+	        message.setPayload("sending......."
+	                .getBytes());
+	        client.publish("application/6/node/4786e6ed00490303/tx", message);
+	        System.out.println("Message printing here "+message);
+	        //System.exit(0);
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }*/
+	 
+	/*try {
+	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490500 ");	
+	    	MqttConnectOptions connOpts = new MqttConnectOptions();
+	        connOpts.setUserName("vikhyat");
+	        connOpts.setPassword("vikhyat".toCharArray());
+	        connOpts.setCleanSession(true);
+	        client = new MqttClient("tcp://192.168.1.129:1883", MqttClient.generateClientId());
+	        
+	        client.connect(connOpts);
+	        client.setCallback(this);
+	        client.subscribe("common");
+	        MqttMessage message = new MqttMessage();
+	        message.setPayload("sending......."
+	                .getBytes());
+	        client.publish("common", message);
+	        System.out.println("Message printing here "+message);
+	        //System.exit(0);
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }*/
 	  
-	  try {
+	 /* try {
 	    	logger.debug("/ INside MQTT Broker 	4786e6ed00490051 ");	
 	    	MqttConnectOptions connOpts = new MqttConnectOptions();
 	        connOpts.setUserName("loragw");
