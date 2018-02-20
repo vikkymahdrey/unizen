@@ -100,7 +100,7 @@
     <section class="sidebar">
         
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+      <!-- <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -108,7 +108,7 @@
                 </button>
               </span>
         </div>
-      </form>
+      </form> -->
      
       
       <ul class="sidebar-menu">
@@ -121,22 +121,47 @@
         <li class="treeview"> 
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span><b>Reports</b></span>
+            <span><b>Uplink/Downlink Logs</b></span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">1</span>
+              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="userInfoHistory"><i class="fa fa-circle-o"></i><b>Users</b></a></li>
-            <li><a href="frameInfos"><i class="fa fa-circle-o"></i> <b>Frames</b></a></li>
-             <li><a href="downlinkQueue"><i class="fa fa-circle-o"></i> <b>Downlink Queue</b></a></li>
+            <li><a href="userInfoHistory"><i class="fa fa-circle-o"></i><b>Admin User</b></a></li>
+            <li><a href="frameInfos"><i class="fa fa-circle-o"></i> <b>Uplink Log</b></a></li>
+             <li><a href="downlinkQueue"><i class="fa fa-circle-o"></i> <b>Downlink Log</b></a></li>
           </ul>
           
              
         </li>
-        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-arrow-right"></i>
+            <span><b>LoRa Node Sync</b></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="sync"><i class="fa fa-circle-o"></i><b>Sync</b></a></li>
+           
+          </ul>
+        </li>
         
         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-arrow-right"></i>
+            <span><b>LoRa Node Config</b></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="deleteNode"><i class="fa fa-circle-o"></i><b>Delete Node</b></a></li>
+           
+          </ul>
+        </li>
+       <!--  <li class="treeview">
           <a href="#">
             <i class="fa fa-music"></i>
             <span><b>Activity Management</b></span>
@@ -163,7 +188,7 @@
            
           </ul>
      
-        </li>
+        </li> -->
         
                 
       </ul>

@@ -29,6 +29,7 @@ public class AppConstants {
 	public static final String TTL_LOGIN_KEY = "app.token.login.ttlmillis";
 	
 	public static final String KEY_ATAPP_MOBILE = "TOSHIBA_MOBILE";
+	public static final String KEY_TOSHIBA_MOBILE_VAL = "UnizenTrustSecret";
 		
 	public static final String SUBJECT_SECURE = "MOBILE_SECURE";
 	public static final String SUBJECT_NON_SECURE = "MOBILE_NON_SECURE";

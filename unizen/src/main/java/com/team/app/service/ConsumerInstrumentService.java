@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team.app.domain.JwtToken;
 import com.team.app.domain.LoraFrame;
+import com.team.app.domain.TblToshibaKeyConfig;
 import com.team.app.domain.TblUserInfo;
 import com.team.app.domain.User;
 import com.team.app.dto.UserLoginDTO;
@@ -35,6 +36,9 @@ public interface ConsumerInstrumentService {
 	public void setUpdateLoraFrames(String deviceId, String nodeName, String devEUI, String central, String peripheral)throws Exception;
 	public LoraFrame getNamingPacket(String deviceId, String nodeName)throws Exception;
 	public void setUpdateNodeName(String nodeName, String devEUI)throws Exception;
+	public List<LoraFrame> getDeviceIdByDevEUI(String deviceId)throws Exception;
+	public void deleteDevByDevEUI(String appId, String devEUI, String deviceId) throws Exception;
+	public TblToshibaKeyConfig getKeyConfig(String keyAtappMobile)throws Exception;
 	
 	
 	

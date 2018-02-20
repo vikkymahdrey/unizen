@@ -29,6 +29,7 @@ import com.team.app.config.MqttIntrf;
 import com.team.app.constant.AppConstants;
 import com.team.app.domain.JwtToken;
 import com.team.app.domain.LoraFrame;
+import com.team.app.domain.TblToshibaKeyConfig;
 import com.team.app.domain.User;
 import com.team.app.dto.ResponseDto;
 import com.team.app.dto.Status;
@@ -294,11 +295,18 @@ public class ConsumerInstrumentController {
     						 // httpHeaders=new HttpHeaders();  
     						  //httpHeaders.add(AppConstants.HTTP_HEADER_JWT_TOKEN,jwt);
     						  //mqttIntrf.doDemo();
+    						
+    						TblToshibaKeyConfig key=consumerInstrumentServiceImpl.getKeyConfig(AppConstants.KEY_TOSHIBA_MOBILE_VAL);
+    						if(key!=null){
+    							logger.debug("Authentication success");
     						  dto.setStatusDesc("Successfully login");
-    						  //dto.setJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJhdWQiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJuYmYiOjE1MDk5NjE1NzIsInN1YiI6InVzZXIiLCJ1c2VybmFtZSI6ImFkbWluIn0.NDZGFGPDQNs7AgmGRzQk1WL5Y1tLjyRbw-n_TwHPZsY");
-    						  dto.setJwt(jwt);
+    						  dto.setJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJhdWQiOiJsb3JhLWFwcC1zZXJ2ZXIiLCJuYmYiOjE1MDk5NjE1NzIsInN1YiI6InVzZXIiLCJ1c2VybmFtZSI6ImFkbWluIn0.NDZGFGPDQNs7AgmGRzQk1WL5Y1tLjyRbw-n_TwHPZsY");
+     						  //dto.setJwt(jwt);
     						  String resp = JsonUtil.objToJson(dto);
     						  responseEntity = new ResponseEntity<String>(resp,HttpStatus.OK);
+    						}else{
+    							 responseEntity = new ResponseEntity<String>("inValid authentication",HttpStatus.NOT_FOUND);
+    						}
     					 }else{
     						// httpHeaders=new HttpHeaders();  
     						//httpHeaders.add(AppConstants.HTTP_HEADER_JWT_TOKEN,null);

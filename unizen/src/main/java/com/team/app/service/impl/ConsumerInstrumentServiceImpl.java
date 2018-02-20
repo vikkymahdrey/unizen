@@ -83,10 +83,10 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 			logger.debug("ttlMillisVal",ttlMillis);
 			logger.debug("ttlBaseMillisVal",ttlBaseMillis);
 			
-			UserLoginDTO accessToken = JWTKeyGenerator.createJWTAccessToken(appKeyConfig.getAtapp_key_value(), AppConstants.TOKEN_LOGN_ID,
+			UserLoginDTO accessToken = JWTKeyGenerator.createJWTAccessToken(appKeyConfig.getToshiba_key_value(), AppConstants.TOKEN_LOGN_ID,
 					AppConstants.SUBJECT_SECURE, ttlMillis);
 			
-			UserLoginDTO baseToken = JWTKeyGenerator.createJWTBaseToken(appKeyConfig.getAtapp_key_value(), AppConstants.TOKEN_LOGN_ID,
+			UserLoginDTO baseToken = JWTKeyGenerator.createJWTBaseToken(appKeyConfig.getToshiba_key_value(), AppConstants.TOKEN_LOGN_ID,
 					AppConstants.SUBJECT_SECURE, ttlBaseMillis);
 			
 									
@@ -124,10 +124,10 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 			long ttlBaseMillis=TimeUnit.DAYS.toMillis(30);		
 	
 						
-			UserLoginDTO newAccessToken = JWTKeyGenerator.createJWTAccessToken(appKeyConfig.getAtapp_key_value(), AppConstants.TOKEN_LOGN_ID,
+			UserLoginDTO newAccessToken = JWTKeyGenerator.createJWTAccessToken(appKeyConfig.getToshiba_key_value(), AppConstants.TOKEN_LOGN_ID,
 					AppConstants.SUBJECT_SECURE, ttlMillis);
 			
-			UserLoginDTO newBaseToken = JWTKeyGenerator.createJWTBaseToken(appKeyConfig.getAtapp_key_value(), AppConstants.TOKEN_LOGN_ID,
+			UserLoginDTO newBaseToken = JWTKeyGenerator.createJWTBaseToken(appKeyConfig.getToshiba_key_value(), AppConstants.TOKEN_LOGN_ID,
 					AppConstants.SUBJECT_SECURE, ttlBaseMillis);
 			
 			userLoginDTO.setAccessToken(newAccessToken.getApiToken());
@@ -224,6 +224,28 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 	
 	public void setUpdateNodeName(String nodeName,String devEUI) throws Exception {
 		frameDao.setUpdateNodeName(nodeName,devEUI);
+	}
+
+
+
+	public List<LoraFrame> getDeviceIdByDevEUI(String deviceId) throws Exception {
+		// TODO Auto-generated method stub
+		return frameDao.getDeviceIdByDevEUI(deviceId.trim());
+	}
+
+
+
+	public void deleteDevByDevEUI(String appId, String devEUI, String deviceId) throws Exception {
+		frameDao.deleteDevByDevEUI(appId,devEUI,deviceId);
+		
+	}
+
+
+
+	
+	public TblToshibaKeyConfig getKeyConfig(String keyAtappMobile) throws Exception {
+	
+		return appKeyConfigDao.getKeyConfigValue(keyAtappMobile);
 	}
 
 

@@ -19,9 +19,9 @@ public class TblToshibaKeyConfig implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 
-	private String atapp_key_name;
+	private String toshiba_key_name;
 
-	private String atapp_key_value;
+	private String toshiba_key_value;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createddt;
@@ -41,20 +41,22 @@ public class TblToshibaKeyConfig implements Serializable {
 		this.id = id;
 	}
 
-	public String getAtapp_key_name() {
-		return this.atapp_key_name;
+	
+
+	public String getToshiba_key_name() {
+		return toshiba_key_name;
 	}
 
-	public void setAtapp_key_name(String atapp_key_name) {
-		this.atapp_key_name = atapp_key_name;
+	public void setToshiba_key_name(String toshiba_key_name) {
+		this.toshiba_key_name = toshiba_key_name;
 	}
 
-	public String getAtapp_key_value() {
-		return this.atapp_key_value;
+	public String getToshiba_key_value() {
+		return toshiba_key_value;
 	}
 
-	public void setAtapp_key_value(String atapp_key_value) {
-		this.atapp_key_value = atapp_key_value;
+	public void setToshiba_key_value(String toshiba_key_value) {
+		this.toshiba_key_value = toshiba_key_value;
 	}
 
 	public Date getCreateddt() {

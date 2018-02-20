@@ -122,7 +122,7 @@ function validate() {
 
 <div class="login-box">
   <div class="login-logo">
-    <h3><b>Toshiba</b>BLE</h3>
+    <h3><b>BLE+LoRa</b> Admin Portal</h3>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
