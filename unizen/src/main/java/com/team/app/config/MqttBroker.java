@@ -65,7 +65,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 	public void doDemo() {
 	  
 	  try {
-	    	logger.debug("/ INside MQTT Broker 4786e6ed00490191 ");
+	    	logger.debug("/ INside MQTT Broker 4786e6ed00490051 ");
 	    	MqttConnectOptions connOpts = new MqttConnectOptions();
 	        connOpts.setUserName("loragw");
 	        connOpts.setPassword("loragw".toCharArray());
@@ -74,17 +74,40 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 	        
 	        client.connect(connOpts);
 	        client.setCallback(this);
-	        client.subscribe("application/6/node/4786e6ed00490191/rx");
+	        client.subscribe("application/2/node/4786e6ed00490051/rx");
 	        MqttMessage message = new MqttMessage();
 	        message.setPayload("sending......."
 	                .getBytes());
-	        client.publish("application/6/node/4786e6ed00490191/tx", message);
+	        client.publish("application/2/node/4786e6ed00490051/tx", message);
 	        System.out.println("Message printing here "+message);
 	        //System.exit(0);
 	    } catch (MqttException e) {
 	        e.printStackTrace();
 	    }
-	         
+	  
+	  try {
+	    	logger.debug("/ INside MQTT Broker 1841223671138130 ");
+	    	MqttConnectOptions connOpts = new MqttConnectOptions();
+	        connOpts.setUserName("loragw");
+	        connOpts.setPassword("loragw".toCharArray());
+	        connOpts.setCleanSession(true);
+	        client = new MqttClient("tcp://139.59.14.31:1883", MqttClient.generateClientId());
+	        
+	        client.connect(connOpts);
+	        client.setCallback(this);
+	        client.subscribe("application/2/node/1841223671138130/rx");
+	        MqttMessage message = new MqttMessage();
+	        message.setPayload("sending......."
+	                .getBytes());
+	        client.publish("application/2/node/1841223671138130/tx", message);
+	        System.out.println("Message printing here "+message);
+	        //System.exit(0);
+	    } catch (MqttException e) {
+	        e.printStackTrace();
+	    }
+	  
+	  
+	        
 	
 	}
 
@@ -483,6 +506,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 						
 					     		 						if(binaryled12.length()<4){
 					     		 							//Naming convension logic implementation
+					     		 							logger.debug("Inside Naming Packet");
 					     		 							flag=1;
 						     		 					
 						     		 					}else{
@@ -505,8 +529,9 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 				     		 			 logger.debug("LED34 Binary Value",decodeBinary);
 				     		 			 if(!firstByte.equals("")){
 				     		 				 if(flag==1){
-				     		 					logger.debug("flag==1 i==2: ",merge);
+				     		 					
 				     		 					 merge=String.valueOf(Character.toChars(b));
+				     		 					logger.debug("flag==1 i==2: ",merge);
 				     		 				 }else{
 						     		 			 //int led34=Integer.parseInt(decodeBinary,2);
 						     		 			 logger.debug("LED34 Binary AS i==2 : ",decodeBinary);
@@ -517,7 +542,27 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 						     		 				frame.setLed4("0");
 						     		 			 }else{
 						     		 				logger.debug("LED34 Binary AS !0 ELSE condition");
-						     		 				 if(decodeBinary.length()<5){
+						     		 				String s=String.format("%02X ", b);
+						     		 				logger.debug("LED34 value AS !0 ELSE condition",s);
+						     		 				String led3=s.substring(0, 1);				     		 												
+				     		 						String led4=s.substring(1);
+				     		 						
+				     		 						int l3=Character.getNumericValue(led3.charAt(0));
+				     		 						int l4=Character.getNumericValue(led4.charAt(0));
+				     		 						logger.debug("l3 valuee : ",l3);
+				     		 						logger.debug("l4 valuee : ",l4);
+				     		 						
+				     		 						//String l3Binary=Integer.toBinaryString(l3);
+				     		 						//String l4Binary=Integer.toBinaryString(l4);
+				     		 						 //logger.debug("l3Binary values: ",l3Binary);
+				     		 						 //logger.debug("l4Binary values: ",l4Binary);
+				     		 						 
+				     		 						//int le3=Integer.parseInt(l3Binary,2);
+				     		 						//int le4=Integer.parseInt(l4Binary,2);
+					     		 					frame.setLed3(String.valueOf(l3));
+						     		 				frame.setLed4(String.valueOf(l4));
+				     		 						
+						     		 				 /*if(decodeBinary.length()<5){
 						     		 					logger.debug("LED34 Binary AS !0 ELSE condition length<4");
 						     		 					frame.setLed3("0");
 						     		 						int led4=Integer.parseInt(decodeBinary,2);
@@ -535,7 +580,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 						     		 						frame.setLed3("15");
 								     		 				frame.setLed4("15");
 						     		 					}
-						     		 				 }
+						     		 				 }*/
 						     		 			 }
 						     		 			 
 						     		 			 
@@ -547,8 +592,9 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 			 String decodeBinary = Integer.toBinaryString(b);
 					     		 			 if(!decodeBinary.equalsIgnoreCase("11111111111111111111111111111111") && !firstByte.equals("")){
 					     		 				if(flag==1){
-					     		 					logger.debug("flag==1 i==3: ",merge);
+					     		 					
 					     		 					 merge=merge+String.valueOf(Character.toChars(b));
+					     		 					 logger.debug("flag==1 i==3: ",merge);
 					     		 				 }else{
 							     		 			 int temp=Integer.parseInt(decodeBinary,2);
 							     		 			 logger.debug("Temperature AS i==3 : ",temp);
@@ -577,21 +623,27 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 				if(flag==1){
 					     		 					logger.debug("flag==1 i==5: ",merge);
 					     		 					 merge=merge+String.valueOf(Character.toChars(b));
+					     		 					logger.debug("flag==1 i==5 DeviceId: ",frame.getDeviceId());
+					     		 					logger.debug("flag==1 i==5 EUI : ",frm.getDevEUI());
 					     		 					List<LoraFrame> frmList=consumerInstrumentServiceImpl.getFramesByNodeNameAndID(frame.getDeviceId(),frm.getDevEUI());
 					     		 					if(frmList!=null && !frmList.isEmpty()){
 					     		 						
 					     		 						logger.debug("flag==1 i==5: size ",frmList.size());
-					     		 						logger.debug("DeviceId id ",frame.getDeviceId().trim());
-					     		 						logger.debug("nodeName ",frm.getNodeName().trim());
-					     		 						logger.debug("merge ",merge.trim());
+					     		 						logger.debug("DeviceId id",frame.getDeviceId());
+					     		 						logger.debug("nodeName",frm.getNodeName());
+					     		 						logger.debug("DevEUI",frm.getDevEUI());
+					     		 						
 					     		 						if(i==5 && !merge.equalsIgnoreCase("")){					     		 							
 					     		 							//merge="C_"+merge;
 					     		 							central=merge;
 					     		 							logger.debug("merge IF ",merge+"index "+i);
 					     		 							
-					     		 						}					     		 						
+					     		 						}	
+					     		 						
+					     		 						logger.debug("merge",merge);
+					     		 						logger.debug("central",central);
 					     		 						//consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId(),frm.getNodeName(),central.trim(),merge.trim());
-					     		 						consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId(),frm.getNodeName(),frm.getDevEUI(),central.trim(),merge.trim());
+					     		 						consumerInstrumentServiceImpl.setUpdateLoraFrames(frame.getDeviceId().trim(),frm.getNodeName().trim(),frm.getDevEUI().trim(),central.trim(),merge.trim());
 
 					     		 						
 					     		 					}else{
@@ -603,6 +655,7 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 						     		 						 logger.debug("Naming Packet Named");
 						     		 						 logger.debug("Central Naming Packet Named",namingList.getCentral());
 						     		 						 logger.debug("Pheripheral Naming Packet Named",namingList.getPeripheral());
+						     		 						 logger.debug("getNodeName Naming Packet Named",frm.getNodeName());
 						     		 						frame.setCentral(namingList.getCentral()); 
 						     		 						frame.setPeripheral(namingList.getPeripheral());
 						     		 						if(!frm.getNodeName().equalsIgnoreCase(namingList.getNodeName())){

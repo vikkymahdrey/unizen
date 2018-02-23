@@ -34,7 +34,7 @@ public interface ConsumerInstrumentService {
 	public void updateNSUser(User u)throws Exception;
 	public List<LoraFrame> getFramesByNodeNameAndID(String deviceId, String devEUI) throws Exception;
 	public void setUpdateLoraFrames(String deviceId, String nodeName, String devEUI, String central, String peripheral)throws Exception;
-	public LoraFrame getNamingPacket(String deviceId, String nodeName)throws Exception;
+	public LoraFrame getNamingPacket(String deviceId, String devEUI)throws Exception;
 	public void setUpdateNodeName(String nodeName, String devEUI)throws Exception;
 	public List<LoraFrame> getDeviceIdByDevEUI(String deviceId)throws Exception;
 	public void deleteDevByDevEUI(String appId, String devEUI, String deviceId) throws Exception;
