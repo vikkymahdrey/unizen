@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.app.config.MqttIntrf;
+import com.team.app.constant.AppConstants;
 import com.team.app.domain.LoraFrame;
 import com.team.app.domain.TblUserInfo;
 import com.team.app.dto.ApplicationDto;
@@ -137,7 +138,7 @@ public class UserInfoController {
 					 for (int i = 0; i < arr.size(); i++) {
 						 JSONObject jsonObj = (JSONObject) arr.get(i);
 						
-						if(jsonObj.get("name").toString().equalsIgnoreCase("Unizen")){
+						if(jsonObj.get("name").toString().equalsIgnoreCase(AppConstants.Organisation)){
 							logger.debug("Name matching ..");
 							logger.debug("Organisation name ..",jsonObj.get("name").toString());
 							logger.debug("Organisation id ..",jsonObj.get("id").toString());
@@ -473,7 +474,7 @@ public class UserInfoController {
 					 for (int i = 0; i < arr.size(); i++) {
 						 JSONObject jsonObj = (JSONObject) arr.get(i);
 						
-						if(jsonObj.get("name").toString().equalsIgnoreCase("Unizen")){
+						if(jsonObj.get("name").toString().equalsIgnoreCase(AppConstants.Organisation)){
 							logger.debug("Name matching ..");
 							logger.debug("Organisation name ..",jsonObj.get("name").toString());
 							logger.debug("Organisation id ..",jsonObj.get("id").toString());

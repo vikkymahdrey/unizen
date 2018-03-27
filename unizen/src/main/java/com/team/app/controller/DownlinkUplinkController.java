@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.team.app.constant.AppConstants;
 import com.team.app.domain.DownlinkQueue;
 import com.team.app.logger.AtLogger;
 import com.team.app.service.MqttFramesService;
@@ -80,7 +81,7 @@ private static final AtLogger logger = AtLogger.getLogger(DownlinkUplinkControll
 					 for (int i = 0; i < arr.size(); i++) {
 						 JSONObject jsonObj = (JSONObject) arr.get(i);
 						
-						if(jsonObj.get("name").toString().equalsIgnoreCase("Unizen")){
+						if(jsonObj.get("name").toString().equalsIgnoreCase(AppConstants.Organisation)){
 							logger.debug("Name matching ..");
 							logger.debug("Organisation name ..",jsonObj.get("name").toString());
 							logger.debug("Organisation id ..",jsonObj.get("id").toString());
@@ -161,7 +162,7 @@ private static final AtLogger logger = AtLogger.getLogger(DownlinkUplinkControll
 					 for (int i = 0; i < arr.size(); i++) {
 						 JSONObject jsonObj = (JSONObject) arr.get(i);
 						
-						if(jsonObj.get("name").toString().equalsIgnoreCase("Unizen")){
+						if(jsonObj.get("name").toString().equalsIgnoreCase(AppConstants.Organisation)){
 							logger.debug("Name matching ..");
 							logger.debug("Organisation name ..",jsonObj.get("name").toString());
 							logger.debug("Organisation id ..",jsonObj.get("id").toString());

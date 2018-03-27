@@ -1,4 +1,9 @@
 package com.team.app.config;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +21,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.app.dao.FrameDao;
@@ -439,6 +446,66 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 										  		frm.setfPort(json.get("fPort").toString().trim());
 										  		//frm.setCreatedAt(new Date(System.currentTimeMillis()));
 										  		//frm.setUpdatedAt(new Date(System.currentTimeMillis()));
+										  		
+										  		
+										  		
+										  		
+										  		/*try {		
+													
+													logger.debug("Mqtt Http Integration",json.get("data").toString());
+														
+													JSONObject ob1=null;
+															ob1=new JSONObject();
+																ob1.put("data", json.get("data").toString());
+																ob1.put("applicationID",json.get("applicationID").toString());
+																ob1.put("devEUI",json.get("devEUI").toString());
+													
+													logger.debug("Http Integration user",ob1);
+													
+													String url="http://103.60.63.174:50102/iotasia2018/iotpkthandler";
+													logger.debug("URLConn",url);
+													
+													URL obj1 = new URL(url);
+													HttpURLConnection con = (HttpURLConnection) obj1.openConnection();
+													con.setDoOutput(true);
+													con.setRequestMethod("POST");
+													con.setRequestProperty("accept", "application/json");
+													con.setRequestProperty("Content-Type", "application/json");
+													
+													OutputStream os = con.getOutputStream();
+											        os.write(json.toString().getBytes());
+											        os.flush();
+											        os.close();
+											        
+													int responseCode = con.getResponseCode();
+														logger.debug("POST Response Code in /httpPayload:: " + responseCode);
+															logger.debug("POST Response message /httpPayload :: " + con.getResponseMessage());
+													
+													if(responseCode == HttpURLConnection.HTTP_OK) {
+														logger.debug("Token valid,POST Response  200");
+														
+														BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+														String inputLine;
+														StringBuffer response = new StringBuffer();
+
+														while ((inputLine = in.readLine()) != null) {
+															response.append(inputLine);
+														}
+														
+														in.close();
+														logger.debug("Success HTTP Integration with 200");
+													}else{
+														logger.debug("Failure HTTP Integration without 200");
+													}
+													
+													
+													
+												}catch(Exception ae) {
+													logger.error("IN contoller catch block /MqttHttpPayload",ae);
+													ae.printStackTrace();
+														
+												}*/
+										  		
 				     		 		
 								   LoraFrame frame=null;
 								   		frame=new LoraFrame();
@@ -1062,6 +1129,11 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 	
 	
 
+
+	private JSONObject JSONObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public void deliveryComplete(IMqttDeliveryToken token) {
 	    // TODO Auto-generated method stub

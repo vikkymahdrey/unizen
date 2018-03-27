@@ -88,6 +88,86 @@ public class ConsumerInstrumentController {
 	}
 
 
+	@RequestMapping(value = "/httpPayload", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> httpPayload(@RequestBody String received){
+		logger.info("Inside in /httpPayload ");
+		logger.info("/httpPayload ",received);
+
+		JSONObject obj=null;
+		ResponseEntity<String> responseEntity = null;
+	
+		
+		try{		
+				obj=new JSONObject();
+				obj=(JSONObject)new JSONParser().parse(received);
+		}catch(Exception e){
+			return new ResponseEntity<String>("Empty received body /httpPayload", HttpStatus.BAD_REQUEST);
+		}
+		
+				
+		try {		
+						
+			logger.debug("Http Integration",obj.get("data").toString());
+						
+			String user=obj.toString();
+			//String user="win";
+			JSONObject ob1=null;
+					ob1=new JSONObject();
+						ob1.put("data", obj.get("data").toString());
+						ob1.put("applicationID",obj.get("applicationID").toString());
+						ob1.put("devEUI",obj.get("devEUI").toString());
+						ob1.put("nodeName",obj.get("nodeName").toString());
+			
+			logger.debug("Http Integration user",ob1);
+			
+			String url="http://103.60.63.174:50102/iotasia2018/iotpkthandler";
+			logger.debug("URLConn",url);
+			
+			URL obj1 = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) obj1.openConnection();
+			con.setDoOutput(true);
+			con.setRequestMethod("POST");
+			con.setRequestProperty("accept", "application/json");
+			con.setRequestProperty("Content-Type", "application/json");
+			
+			OutputStream os = con.getOutputStream();
+	        os.write(ob1.toString().getBytes());
+	        os.flush();
+	        os.close();
+	        
+			int responseCode = con.getResponseCode();
+				logger.debug("POST Response Code in /httpPayload:: " + responseCode);
+					logger.debug("POST Response message /httpPayload :: " + con.getResponseMessage());
+			
+			if(responseCode == HttpURLConnection.HTTP_OK) {
+				logger.debug("Token valid,POST Response  200");
+				
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				
+				in.close();
+				responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+			}else{
+				
+				responseEntity = new ResponseEntity<String>(received,HttpStatus.EXPECTATION_FAILED);
+			}
+			
+			//responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+			
+		}catch(Exception ae) {
+			logger.error("IN contoller catch block /httpPayload",ae);
+			ae.printStackTrace();
+				
+		}
+		return responseEntity;
+	}
+	
+	
 	@RequestMapping(value = "/mobileLoginAuth", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> userLoginFromApp(@RequestBody String received){
 		logger.info("Inside in /mobileLoginAuth ");
