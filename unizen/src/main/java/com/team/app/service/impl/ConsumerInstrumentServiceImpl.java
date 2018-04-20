@@ -250,6 +250,12 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 
 
 
+	public LoraFrame getNamingPacket1(String deviceId, String devEUI) throws Exception {
+		return frameDao.getNamingPacket1(deviceId,devEUI);
+	}
+
+
+
 
 
 	

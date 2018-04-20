@@ -717,6 +717,9 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 					     		 						
 					     		 					}
 					     		 				}else{
+					     		 					logger.debug("In else loop");
+					     		 					logger.debug("In else loop deviceId",frame.getDeviceId());
+					     		 					logger.debug("In else loop devEUI",frm.getDevEUI());
 					     		 					 LoraFrame namingList=consumerInstrumentServiceImpl.getNamingPacket(frame.getDeviceId(),frm.getDevEUI());
 						     		 					 if(namingList!=null){
 						     		 						 logger.debug("Naming Packet Named");
@@ -731,6 +734,14 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 						     		 						}
 						     		 							
 
+						     		 					 }else{
+						     		 						LoraFrame frmName=consumerInstrumentServiceImpl.getNamingPacket1(frame.getDeviceId(),frm.getDevEUI());
+						     		 						if(frmName!=null){
+							     		 						if(!frm.getNodeName().equalsIgnoreCase(frmName.getNodeName())){
+							     		 							logger.debug("Loraserver node name has changed");
+							     		 							consumerInstrumentServiceImpl.setUpdateNodeName(frm.getNodeName(),frm.getDevEUI());
+							     		 						}
+						     		 						}	
 						     		 					 }
 					     		 					 
 							     		 			 int humidity=Integer.parseInt(decodeBinary,2);

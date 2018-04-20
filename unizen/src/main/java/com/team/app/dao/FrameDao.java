@@ -66,6 +66,9 @@ public interface FrameDao extends JpaRepository<LoraFrame, Serializable> {
 	@Query(value="delete from lora_frames  where applicationID=?1 and devEUI=?2 and DeviceId=?3 ",nativeQuery = true)
 	@Transactional
 	void deleteDevByDevEUI(@Param("applicationID") String applicationID,@Param("devEUI") String devEUI,@Param("DeviceId") String DeviceId);
+
+	@Query(value="Select f.* from lora_frames f where f.DeviceId=?1 and f.devEUI=?2 order by id desc limit 1",nativeQuery = true)
+	LoraFrame getNamingPacket1(@Param("deviceId") String deviceId,@Param("devEUI") String devEUI);
 	
 	
 
