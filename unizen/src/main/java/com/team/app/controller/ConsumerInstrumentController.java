@@ -29,7 +29,6 @@ import com.team.app.config.MqttIntrf;
 import com.team.app.constant.AppConstants;
 import com.team.app.domain.JwtToken;
 import com.team.app.domain.LoraFrame;
-import com.team.app.domain.TblToshibaKeyConfig;
 import com.team.app.domain.User;
 import com.team.app.dto.ResponseDto;
 import com.team.app.dto.Status;

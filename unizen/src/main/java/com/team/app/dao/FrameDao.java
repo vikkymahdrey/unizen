@@ -59,7 +59,7 @@ public interface FrameDao extends JpaRepository<LoraFrame, Serializable> {
 	@Transactional
 	void setUpdateNodeName(@Param("nodeName") String nodeName, @Param("devEUI") String devEUI);
 
-	@Query(value="Select * from lora_frames f where f.devEUI=?1 group by DeviceId",nativeQuery = true)
+	@Query(value="Select f.* from lora_frames f where f.devEUI=?1 group by f.DeviceId",nativeQuery = true)
 	List<LoraFrame> getDeviceIdByDevEUI(@Param("devEUI") String devEUI);
 
 	@Modifying

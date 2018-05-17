@@ -217,9 +217,13 @@ function getDevIDByDeviceEUI()
                 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete")
                 { 
                     var returnText=xmlHttp.responseText;
-                   
+                    if(returnText!=""){
+                	  
                     var devid=document.getElementById("devid");
-                    devid.innerHTML='<select  name="devname" id="devid"><Option value="0">--Choose Device EUI--</Option>'+returnText+'</select>';                                             
+                    devid.innerHTML='<select  name="devname" id="devid"><Option value="0">--Choose Device EUI--</Option>'+returnText+'</select>';      
+                   }else{
+                	   alert("DeviceEUI not associated with deviceId");
+                   }	
                 }
             }
             
@@ -359,7 +363,7 @@ function getDevIDByDeviceEUI()
 				</div>
 		 		
 		 		<div class="box-header with-border">
-  					  <h5 class="text-blue text-left "><span class="fa fa-recycle"></span>&nbsp;&nbsp;<b>Remove Lora Device </b></h5>
+  					  <h5 class="text-blue text-left "><span class="fa fa-recycle"></span>&nbsp;&nbsp;<b>Remove LoRa Device </b></h5>
        
    				</div><!-- /.box-header -->
 		 							

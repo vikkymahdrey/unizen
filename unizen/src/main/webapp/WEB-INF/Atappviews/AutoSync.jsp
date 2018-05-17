@@ -126,7 +126,7 @@ function getDevEUIByAppID()
     	}
     else
     	{
-    var url="getDevEUI?appId="+appid;                                    
+    var url="getDevEUISync?appId="+appid;                                    
     xmlHttp=GetXmlHttpObj()
     if (xmlHttp==null)
     {
