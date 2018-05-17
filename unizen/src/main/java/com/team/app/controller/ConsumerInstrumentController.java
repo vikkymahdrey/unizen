@@ -136,7 +136,7 @@ public class ConsumerInstrumentController {
 	        
 			int responseCode = con.getResponseCode();
 				logger.debug("POST Response Code in /httpPayload:: " + responseCode);
-					logger.debug("POST Response message /httpPayload :: " + con.getResponseMessage());
+					//logger.debug("POST Response message /httpPayload :: " + con.getResponseMessage());
 			
 			if(responseCode == HttpURLConnection.HTTP_OK) {
 				logger.debug("Token valid,POST Response  200");
