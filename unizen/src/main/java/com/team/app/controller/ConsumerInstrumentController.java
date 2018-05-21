@@ -71,7 +71,8 @@ public class ConsumerInstrumentController {
 	static {
 		
 	    //for testing only
-		//for testing only
+		
+		
 		//mqttIntrf.doDemo();
 		
 	    javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
