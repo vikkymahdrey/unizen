@@ -256,6 +256,21 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 
 
 
+	
+	public void deleteDevEUI(String appId, String devEUI) throws Exception {
+		frameDao.deleteDevEUI(appId,devEUI);
+		
+	}
+
+
+
+	
+	public List<LoraFrame> getDevEUIByAppId(String appId) throws Exception {
+		return frameDao.getDevEUIByAppId(appId);
+	}
+
+
+
 
 
 	

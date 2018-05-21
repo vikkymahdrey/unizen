@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Toshiba Node Sync</title>
+    <title>Node Sync</title>
     
 	<script type="text/javascript" src="js/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -285,6 +285,10 @@ function getDevEUIByAppID()
           </a>
           <ul class="treeview-menu">
             <li><a href="deleteNode"><i class="fa fa-circle-o"></i><b>Delete Node</b></a></li>
+           
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="delDevEUI"><i class="fa fa-circle-o"></i><b>Delete DevEUI</b></a></li>
            
           </ul>
         </li>

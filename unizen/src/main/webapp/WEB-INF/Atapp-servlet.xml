@@ -24,7 +24,7 @@
 	
 	
 
-	 <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/unizen" /> 
+	 <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/AppDB" /> 
 	
 
 	<bean id="hibernateJpaVendorAdapter"
@@ -88,7 +88,7 @@
 		</property>
 	</bean>
 	 
-<bean id="jspViewResolver"
+ <bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />

@@ -23,7 +23,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Toshiba Users</title>
+<title>Users</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/custom_siemens.css" rel="stylesheet">
@@ -148,6 +148,10 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="deleteNode"><i class="fa fa-circle-o"></i><b>Delete Node</b></a></li>
+           
+          </ul>
+           <ul class="treeview-menu">
+            <li><a href="delDevEUI"><i class="fa fa-circle-o"></i><b>Delete DevEUI</b></a></li>
            
           </ul>
         </li>

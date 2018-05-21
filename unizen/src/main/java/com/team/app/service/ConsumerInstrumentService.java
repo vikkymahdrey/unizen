@@ -40,6 +40,8 @@ public interface ConsumerInstrumentService {
 	public void deleteDevByDevEUI(String appId, String devEUI, String deviceId) throws Exception;
 	public TblToshibaKeyConfig getKeyConfig(String keyAtappMobile)throws Exception;
 	public LoraFrame getNamingPacket1(String deviceId, String devEUI)throws Exception;
+	public void deleteDevEUI(String appId, String devEUI)throws Exception;
+	public List<LoraFrame> getDevEUIByAppId(String appId)throws Exception;
 	
 	
 	

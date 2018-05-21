@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Toshiba Admin Home</title>
+    <title>Admin Home</title>
     
 	<script type="text/javascript" src="js/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -160,6 +160,10 @@
             <li><a href="deleteNode"><i class="fa fa-circle-o"></i><b>Delete Node</b></a></li>
            
           </ul>
+           <ul class="treeview-menu">
+            <li><a href="delDevEUI"><i class="fa fa-circle-o"></i><b>Delete DevEUI</b></a></li>
+           
+          </ul>
         </li>
        <!--  <li class="treeview">
           <a href="#">
@@ -221,7 +225,7 @@
 							  <!-- Apply any bg-* class to to the icon to color it -->
 							  	<span class="info-box-icon bg-blue"><i class="fa fa-user"></i></span>
 							  	<div class="info-box-content">
-								    <span class="info-box-text">Toshiba Users</span>
+								    <span class="info-box-text">Admin Users</span>
 								    <%if(userInfos!=null && !userInfos.isEmpty()){ %>
 								    <span class="info-box-number"><b><%=userInfos.get(0)%></b></span>
 								    <%}%>
