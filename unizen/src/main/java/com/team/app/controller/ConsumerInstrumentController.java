@@ -71,6 +71,7 @@ public class ConsumerInstrumentController {
 	static {
 		
 	    //for testing only
+		//for testing only
 		
 		
 		//mqttIntrf.doDemo();
