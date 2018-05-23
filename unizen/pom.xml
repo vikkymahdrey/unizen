@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.team.app</groupId>
-	<artifactId>unizen</artifactId>
+	<artifactId>toshiba</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Unizen Maven Webapp</name>
+	<name>Toshiba Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<build>
 		<plugins>
@@ -23,7 +23,7 @@
 				<version>2.4</version>
 			</plugin>
 		</plugins>
-		<finalName>unizen</finalName>
+		<finalName>toshiba</finalName>
 	</build>
 
 	<properties>
