@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.team.app</groupId>
-	<artifactId>unizen1</artifactId>
+	<artifactId>toshiba</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Toshiba Maven Webapp</name>
@@ -11,10 +11,10 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
@@ -23,7 +23,7 @@
 				<version>2.4</version>
 			</plugin>
 		</plugins>
-		<finalName>unizen1</finalName>
+		<finalName>toshiba</finalName>
 	</build>
 
 	<properties>
