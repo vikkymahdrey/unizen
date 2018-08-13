@@ -22,15 +22,16 @@ public void doDemo() {
         connOpts.setUserName("loragw");
         connOpts.setPassword("loragw".toCharArray());
         connOpts.setCleanSession(true);
-        client = new MqttClient("tcp://139.59.84.50:1883", MqttClient.generateClientId());
+        client = new MqttClient("tcp://139.59.3.149:1883", MqttClient.generateClientId());
         
         client.connect(connOpts);
         client.setCallback(this);
-        client.subscribe("application/1/node/4786e6ed00490044/rx");
+        client.subscribe("application/2/node/3456734563456700/rx");
         MqttMessage message = new MqttMessage();
         message.setPayload("A single message from my computer fff"
                 .getBytes());
-        client.publish("application/1/node/4786e6ed00490044/tx", message);
+        client.publish("application/2/node/3456734563456700/tx", message);
+        System.out.println("Message printing here "+message);
         //System.exit(0);
     } catch (MqttException e) {
         e.printStackTrace();

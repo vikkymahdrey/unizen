@@ -7,10 +7,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class test {
 public static void main(String[] args){
 	System.out.println("IN Main");
-	 String topic        = "MQTT";
+	 String topic        = "application/2/node/3456734563456700/tx";
      String content      = "Hi Vikky";
      int qos             = 2;
-     String broker       = "tcp://139.59.84.50:1883";
+     String broker       = "tcp://139.59.3.149:1883";
      //String clientId     = "262311";
      MemoryPersistence persistence = new MemoryPersistence();
 

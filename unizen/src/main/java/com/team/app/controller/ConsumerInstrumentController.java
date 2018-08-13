@@ -234,6 +234,88 @@ public class ConsumerInstrumentController {
 		return responseEntity;
 	}
 	
+	
+	@RequestMapping(value = "/angular2ServerAPI", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> angular2ServerAPIHandler(){
+		logger.info("Inside in /angular2ServerAPI ");
+		logger.info("/angular2ServerAPI ");
+
+		ResponseEntity<String> responseEntity = null;
+		UserLoginDTO userLoginDTO=null;
+		
+		
+				
+		try {			
+							
+    				
+    				userLoginDTO=new UserLoginDTO();
+    				
+    				userLoginDTO.setUserId("1001");				
+					String response = JsonUtil.objToJson(userLoginDTO);
+			
+					responseEntity = new ResponseEntity<String>(response, HttpStatus.OK);
+			
+			
+		}catch(AtAppException ae) {
+			logger.error("IN contoller catch block /mobileLoginAuth",ae);
+			userLoginDTO=new UserLoginDTO();
+			userLoginDTO.setStatusDesc(ae.getMessage());
+			userLoginDTO.setStatusCode(ae.getHttpStatus().toString());
+			String response = JsonUtil.objToJson(userLoginDTO);
+			responseEntity = new ResponseEntity<String>(response, ae.getHttpStatus());
+		}
+		return responseEntity;
+	}
+	
+	
+	@RequestMapping(value = "/angular2ServerAPIPost", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> angular2ServerAPIPostHandler(@RequestBody String received){
+		logger.info("Inside in /angular2ServerAPIPost ");
+		logger.info("/angular2ServerAPIPost ");
+
+		JSONObject obj=null;
+		ResponseEntity<String> responseEntity = null;
+		HttpHeaders httpHeaders =null;
+		UserLoginDTO userLoginDTO=null;
+		
+		try{		
+				obj=new JSONObject();
+				obj=(JSONObject)new JSONParser().parse(received);
+		}catch(Exception e){
+			return new ResponseEntity<String>("Empty received body /angular2ServerAPIPost", HttpStatus.EXPECTATION_FAILED);
+		}
+		
+				
+		try {			
+			
+			if( obj.get("username").toString()!=null && !obj.get("username").toString().isEmpty() 
+    				&& obj.get("password").toString()!=null && !obj.get("password").toString().isEmpty() ){
+    					
+    				logger.debug("username for /angular2ServerAPIPost :",obj.get("username").toString());
+    				logger.debug("password for /angular2ServerAPIPost :",obj.get("password").toString());
+    				userLoginDTO=new UserLoginDTO();
+    				userLoginDTO.setStatusDesc("Successfully call POST");
+    				userLoginDTO.setUserId("2003");					
+    				
+    				
+					String response = JsonUtil.objToJson(userLoginDTO);
+			
+					responseEntity = new ResponseEntity<String>(response,httpHeaders, HttpStatus.OK);
+			
+			}else{
+				responseEntity = new ResponseEntity<String>("Any or all in usertype/mobileNo/pwd is null",HttpStatus.METHOD_NOT_ALLOWED);
+			}
+		}catch(AtAppException ae) {
+			logger.error("IN contoller catch block /mobileLoginAuth",ae);
+			userLoginDTO=new UserLoginDTO();
+			userLoginDTO.setStatusDesc(ae.getMessage());
+			userLoginDTO.setStatusCode(ae.getHttpStatus().toString());
+			String response = JsonUtil.objToJson(userLoginDTO);
+			responseEntity = new ResponseEntity<String>(response, ae.getHttpStatus());
+		}
+		return responseEntity;
+	}
+	
 	@RequestMapping(value = "/getRefreshToken", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getRefreshTokenHandler(@RequestHeader(value = AppConstants.HTTP_HEADER_BASE_TOKEN_NAME) String refreshToken){
 		logger.info("Inside /getRefreshToken");
@@ -1446,6 +1528,86 @@ public class ConsumerInstrumentController {
 											
 							
 								String devEUI=json.get("devEUI").toString().trim();
+								
+								
+								/*For Downlink queue checkout*/																	
+									 try {										   
+										   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
+											logger.debug("urlQueue ",urlQueue);
+											URL urlQ = new URL(urlQueue);
+											HttpURLConnection c = (HttpURLConnection) urlQ.openConnection();
+											c.setDoOutput(true);
+											c.setRequestMethod("GET");
+											c.setRequestProperty("accept", "application/json");
+											c.setRequestProperty("Content-Type", "application/json");
+											c.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+											
+											    
+											int respQueue = c.getResponseCode();
+												logger.debug("GET Response Code :: " + respQueue);
+													    				
+											if(respQueue == HttpURLConnection.HTTP_OK) {
+												logger.debug("Token valid,GET Response with 200");
+												
+												BufferedReader inQ = new BufferedReader(new InputStreamReader(c.getInputStream()));
+												String inputLine;
+												StringBuffer respQ = new StringBuffer();
+
+												while ((inputLine = inQ.readLine()) != null) {
+													respQ.append(inputLine);
+												}
+												
+												inQ.close();
+												
+												JSONObject j=null;
+													j=new JSONObject();
+												j=(JSONObject)new JSONParser().parse(respQ.toString());
+											
+												JSONArray arrJ=(JSONArray) j.get("items");    					
+												
+												if(arrJ!=null && arrJ.size()>0){
+													logger.debug("Inside downlink arrJ not null");
+													 logger.debug("Size Downink GET",arrJ.size());
+													 for (int k = 0; k < arrJ.size(); k++) {
+														 JSONObject jsObj = (JSONObject) arrJ.get(k);
+														 logger.debug("jsonObj Downink GET",jsObj);
+														 
+														/*Deletion queue started*/ 
+														 try{
+															 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
+																logger.debug("Delete URLConn",deleteURL);
+																URL deleteURLObj = new URL(deleteURL);
+																HttpURLConnection conn = (HttpURLConnection) deleteURLObj.openConnection();
+																conn.setDoOutput(true);
+																conn.setRequestMethod("DELETE");
+																conn.setRequestProperty("accept", "application/json");
+																conn.setRequestProperty("Content-Type", "application/json");
+																conn.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+																
+																    
+																int resp = conn.getResponseCode();
+																	logger.debug("DELETE Response Code :: " + resp);
+																		    				
+																if(resp == HttpURLConnection.HTTP_OK) {
+																	logger.debug("Token valid,Delete Response with 200");
+																}
+														 }catch(Exception e){
+															 e.printStackTrace();
+														 }
+														 
+														 /*Deletion queue ended*/ 
+														
+													 }
+										        }
+											}
+											
+									   }catch(Exception e){
+											e.printStackTrace();
+									   }
+								/*End downlink queue checkout*/
+								
+								
+								
 								String strFport=json.get("fPort").toString().trim();
 								int fPort=0;
 									try{
@@ -1728,6 +1890,84 @@ public class ConsumerInstrumentController {
 											
 							
 								String devEUI=json.get("devEUI").toString().trim();
+								
+								/*For Downlink queue checkout*/																	
+								 try {										   
+									   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
+										logger.debug("urlQueue ",urlQueue);
+										URL urlQ = new URL(urlQueue);
+										HttpURLConnection c = (HttpURLConnection) urlQ.openConnection();
+										c.setDoOutput(true);
+										c.setRequestMethod("GET");
+										c.setRequestProperty("accept", "application/json");
+										c.setRequestProperty("Content-Type", "application/json");
+										c.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+										
+										    
+										int respQueue = c.getResponseCode();
+											logger.debug("GET Response Code :: " + respQueue);
+												    				
+										if(respQueue == HttpURLConnection.HTTP_OK) {
+											logger.debug("Token valid,GET Response with 200");
+											
+											BufferedReader inQ = new BufferedReader(new InputStreamReader(c.getInputStream()));
+											String inputLine;
+											StringBuffer respQ = new StringBuffer();
+
+											while ((inputLine = inQ.readLine()) != null) {
+												respQ.append(inputLine);
+											}
+											
+											inQ.close();
+											
+											JSONObject j=null;
+												j=new JSONObject();
+											j=(JSONObject)new JSONParser().parse(respQ.toString());
+										
+											JSONArray arrJ=(JSONArray) j.get("items");    					
+											
+											if(arrJ!=null && arrJ.size()>0){
+												logger.debug("Inside downlink arrJ not null");
+												 logger.debug("Size Downink GET",arrJ.size());
+												 for (int k = 0; k < arrJ.size(); k++) {
+													 JSONObject jsObj = (JSONObject) arrJ.get(k);
+													 logger.debug("jsonObj Downink GET",jsObj);
+													 
+													/*Deletion queue started*/ 
+													 try{
+														 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
+															logger.debug("Delete URLConn",deleteURL);
+															URL deleteURLObj = new URL(deleteURL);
+															HttpURLConnection conn = (HttpURLConnection) deleteURLObj.openConnection();
+															conn.setDoOutput(true);
+															conn.setRequestMethod("DELETE");
+															conn.setRequestProperty("accept", "application/json");
+															conn.setRequestProperty("Content-Type", "application/json");
+															conn.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+															
+															    
+															int resp = conn.getResponseCode();
+																logger.debug("DELETE Response Code :: " + resp);
+																	    				
+															if(resp == HttpURLConnection.HTTP_OK) {
+																logger.debug("Token valid,Delete Response with 200");
+															}
+													 }catch(Exception e){
+														 e.printStackTrace();
+													 }
+													 
+													 /*Deletion queue ended*/ 
+													
+												 }
+									        }
+										}
+										
+								   }catch(Exception e){
+										e.printStackTrace();
+								   }
+							/*End downlink queue checkout*/
+								
+								
 								String strFport=json.get("fPort").toString().trim();
 								int fPort=0;
 									try{
@@ -2009,6 +2249,83 @@ public class ConsumerInstrumentController {
 											
 							
 								String devEUI=json.get("devEUI").toString().trim();
+								
+								/*For Downlink queue checkout*/																	
+								 try {										   
+									   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
+										logger.debug("urlQueue ",urlQueue);
+										URL urlQ = new URL(urlQueue);
+										HttpURLConnection c = (HttpURLConnection) urlQ.openConnection();
+										c.setDoOutput(true);
+										c.setRequestMethod("GET");
+										c.setRequestProperty("accept", "application/json");
+										c.setRequestProperty("Content-Type", "application/json");
+										c.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+										
+										    
+										int respQueue = c.getResponseCode();
+											logger.debug("GET Response Code :: " + respQueue);
+												    				
+										if(respQueue == HttpURLConnection.HTTP_OK) {
+											logger.debug("Token valid,GET Response with 200");
+											
+											BufferedReader inQ = new BufferedReader(new InputStreamReader(c.getInputStream()));
+											String inputLine;
+											StringBuffer respQ = new StringBuffer();
+
+											while ((inputLine = inQ.readLine()) != null) {
+												respQ.append(inputLine);
+											}
+											
+											inQ.close();
+											
+											JSONObject j=null;
+												j=new JSONObject();
+											j=(JSONObject)new JSONParser().parse(respQ.toString());
+										
+											JSONArray arrJ=(JSONArray) j.get("items");    					
+											
+											if(arrJ!=null && arrJ.size()>0){
+												logger.debug("Inside downlink arrJ not null");
+												 logger.debug("Size Downink GET",arrJ.size());
+												 for (int k = 0; k < arrJ.size(); k++) {
+													 JSONObject jsObj = (JSONObject) arrJ.get(k);
+													 logger.debug("jsonObj Downink GET",jsObj);
+													 
+													/*Deletion queue started*/ 
+													 try{
+														 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
+															logger.debug("Delete URLConn",deleteURL);
+															URL deleteURLObj = new URL(deleteURL);
+															HttpURLConnection conn = (HttpURLConnection) deleteURLObj.openConnection();
+															conn.setDoOutput(true);
+															conn.setRequestMethod("DELETE");
+															conn.setRequestProperty("accept", "application/json");
+															conn.setRequestProperty("Content-Type", "application/json");
+															conn.setRequestProperty("Grpc-Metadata-Authorization",jwt);
+															
+															    
+															int resp = conn.getResponseCode();
+																logger.debug("DELETE Response Code :: " + resp);
+																	    				
+															if(resp == HttpURLConnection.HTTP_OK) {
+																logger.debug("Token valid,Delete Response with 200");
+															}
+													 }catch(Exception e){
+														 e.printStackTrace();
+													 }
+													 
+													 /*Deletion queue ended*/ 
+													
+												 }
+									        }
+										}
+										
+								   }catch(Exception e){
+										e.printStackTrace();
+								   }
+							/*End downlink queue checkout*/
+								
 								String strFport=json.get("fPort").toString().trim();
 								int fPort=0;
 									try{

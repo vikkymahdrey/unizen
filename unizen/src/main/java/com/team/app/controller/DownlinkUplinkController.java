@@ -181,7 +181,7 @@ private static final AtLogger logger = AtLogger.getLogger(DownlinkUplinkControll
 	   
 	   
 	   try{
-			//logger.debug("In /downlinkQueue");
+			logger.debug("In /downlinkQueue");
 			
 			mqttFramesService.deleteDownlinkQuere();
 		String url="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";

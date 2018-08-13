@@ -24,7 +24,7 @@
 	
 	
 
-	 <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/AppDB" /> 
+	 <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/unizen" /> 
 	
 
 	<bean id="hibernateJpaVendorAdapter"
@@ -94,6 +94,8 @@
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/Atappviews/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean> 
+	
+	<!-- <mvc:resources mapping = "/Atappviews/**" location = "/WEB-INF/Atappviews/" /> -->
 
 </beans>

@@ -332,7 +332,7 @@ function getDevEUIByAppID()
    						  <div class="row" >
     				    	<div class="col-sm-12">	
     				    	
-    				    	<form name="form1" action="deleteDevEUI" onsubmit="return confirmValidate();" method="post">
+    				    	<form name="form1" action="#" onsubmit="return confirmValidate();" method="post">
 										
 								  <table class="table">
 								 <%-- 
