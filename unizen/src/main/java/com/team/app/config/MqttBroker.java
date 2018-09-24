@@ -749,14 +749,17 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 							     		 			 frame.setGatewayName(frm.getGatewayName());
 							     		 			 frame.setfPort(frm.getfPort());
 							     		 			 frame.setCreatedAt(new Date(System.currentTimeMillis()));
-							     		 			 frame.setUpdatedAt(new Date(System.currentTimeMillis()));
-							     		 			 LoraFrame lfrm=frameDao.save(frame);
-							     		 			 if(lfrm!=null){
-							     		 				logger.debug("Frame frame updated IF : ",lfrm.getId()); 
-							     		 			 }else{
-							     		 				logger.debug("Frame frame updated ELSE : ");  
-							     		 			 }
-							     		 			 
+							     		 			 frame.setUpdatedAt(new Date(System.currentTimeMillis()));							     		 			 
+							     		 			 boolean flagStatus=consumerInstrumentServiceImpl.getLoraFrameFlagStatus(frame.getDevEUI(),frame.getDeviceId());
+							     		 			 if(flagStatus){
+							     		 				frame.setFlag(true);
+							     		 				LoraFrame lfrm=frameDao.save(frame);
+								     		 			 if(lfrm!=null){
+								     		 				logger.debug("Frame frame updated IF : ",lfrm.getId()); 
+								     		 			 }else{
+								     		 				logger.debug("Frame frame updated ELSE : ");  
+								     		 			 }
+							     		 			 } 
 							     		 			
 					     		 				 }
 					     		 				n++;

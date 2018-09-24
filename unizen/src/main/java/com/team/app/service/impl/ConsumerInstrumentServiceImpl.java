@@ -271,6 +271,71 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 
 
 
+	
+	public boolean getLoraFrameFlagStatus(String devEUI, String deviceId) throws Exception {
+		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
+		if(frm!=null){
+			if(!frm.isFlag()){
+				frm.setFlag(true);
+				frameDao.save(frm);
+				return false;
+			}else{
+				return true;
+			}
+			
+		}else{
+			return true;
+		}
+			
+	}
+
+
+
+	
+	public void setLoraFrameFlagStatusForLed1(String devEUI, String deviceId,String led1) throws Exception {
+		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
+		if(frm!=null){
+			if(frm.isFlag()){
+				frm.setFlag(false);
+				frm.setLed1(led1);
+				frameDao.save(frm);
+			}
+		}
+		
+	}
+
+
+
+	
+	public void setLoraFrameFlagStatusForLed2(String devEUI, String deviceId, String led2) throws Exception {
+		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
+		if(frm!=null){
+			if(frm.isFlag()){
+				frm.setFlag(false);
+				frm.setLed2(led2);
+				frameDao.save(frm);
+			}
+		}
+		
+	}
+
+
+
+
+	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4) throws Exception {
+		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
+		if(frm!=null){
+			if(frm.isFlag()){
+				frm.setFlag(false);
+				frm.setLed3(led3);
+				frm.setLed4(led4);
+				frameDao.save(frm);
+			}
+		}
+	}
+
+
+
 
 
 	

@@ -30,7 +30,7 @@ public class LoraFrame extends BaseEntityInfo implements Serializable {
 	private String devEUI;
 
 	private String deviceId;
-
+	
 	private String fPort;
 
 	@Column(name="gateway_mac")
@@ -49,6 +49,20 @@ public class LoraFrame extends BaseEntityInfo implements Serializable {
 
 	private String led4;
 	
+	@Column(name="flag")
+	private boolean flag;
+	
+	
+	
+	
+	public boolean isFlag() {
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		this.flag = flag;
+	}
+
 	private String peripheral;
 	private String central;
 

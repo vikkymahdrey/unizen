@@ -1416,7 +1416,7 @@ public class ConsumerInstrumentController {
 											logger.debug("/devEUI printing ",jObj.get("devEUI").toString());
 											logger.debug("/fPort printing ",jObj.get("fPort").toString());
 											
-										
+											consumerInstrumentServiceImpl.setLoraFrameFlagStatusForLed1(json.get("devEUI").toString(),jObj.get("deviceId").toString(),jObj.get("led1").toString());
 											String devId=jObj.get("deviceId").toString();
 												String led1=json.get("led1").toString();
 												String dId=devId.substring(0,2);
@@ -1531,7 +1531,7 @@ public class ConsumerInstrumentController {
 								
 								
 								/*For Downlink queue checkout*/																	
-									 try {										   
+							/*		 try {										   
 										   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
 											logger.debug("urlQueue ",urlQueue);
 											URL urlQ = new URL(urlQueue);
@@ -1572,7 +1572,7 @@ public class ConsumerInstrumentController {
 														 JSONObject jsObj = (JSONObject) arrJ.get(k);
 														 logger.debug("jsonObj Downink GET",jsObj);
 														 
-														/*Deletion queue started*/ 
+														Deletion queue started 
 														 try{
 															 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
 																logger.debug("Delete URLConn",deleteURL);
@@ -1595,7 +1595,7 @@ public class ConsumerInstrumentController {
 															 e.printStackTrace();
 														 }
 														 
-														 /*Deletion queue ended*/ 
+														 Deletion queue ended 
 														
 													 }
 										        }
@@ -1603,7 +1603,7 @@ public class ConsumerInstrumentController {
 											
 									   }catch(Exception e){
 											e.printStackTrace();
-									   }
+									   }*/
 								/*End downlink queue checkout*/
 								
 								
@@ -1778,6 +1778,8 @@ public class ConsumerInstrumentController {
 											logger.debug("/devEUI printing ",jObj.get("devEUI").toString());
 											logger.debug("/fPort printing ",jObj.get("fPort").toString());
 											
+											consumerInstrumentServiceImpl.setLoraFrameFlagStatusForLed2(json.get("devEUI").toString(),jObj.get("deviceId").toString(),json.get("led2").toString());
+											
 										
 											String devId=jObj.get("deviceId").toString();
 												String led2=json.get("led2").toString();
@@ -1892,7 +1894,7 @@ public class ConsumerInstrumentController {
 								String devEUI=json.get("devEUI").toString().trim();
 								
 								/*For Downlink queue checkout*/																	
-								 try {										   
+								/* try {										   
 									   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
 										logger.debug("urlQueue ",urlQueue);
 										URL urlQ = new URL(urlQueue);
@@ -1933,7 +1935,7 @@ public class ConsumerInstrumentController {
 													 JSONObject jsObj = (JSONObject) arrJ.get(k);
 													 logger.debug("jsonObj Downink GET",jsObj);
 													 
-													/*Deletion queue started*/ 
+													Deletion queue started 
 													 try{
 														 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
 															logger.debug("Delete URLConn",deleteURL);
@@ -1956,7 +1958,7 @@ public class ConsumerInstrumentController {
 														 e.printStackTrace();
 													 }
 													 
-													 /*Deletion queue ended*/ 
+													 Deletion queue ended 
 													
 												 }
 									        }
@@ -1964,7 +1966,7 @@ public class ConsumerInstrumentController {
 										
 								   }catch(Exception e){
 										e.printStackTrace();
-								   }
+								   }*/
 							/*End downlink queue checkout*/
 								
 								
@@ -2140,6 +2142,7 @@ public class ConsumerInstrumentController {
 											logger.debug("/devEUI printing ",jObj.get("devEUI").toString());
 											logger.debug("/fPort printing ",jObj.get("fPort").toString());
 											
+											consumerInstrumentServiceImpl.setLoraFrameFlagStatusForLed34(json.get("devEUI").toString(),jObj.get("deviceId").toString(),json.get("led3").toString(),json.get("led4").toString());
 											String led3=json.get("led3").toString();
 											String led4=json.get("led4").toString();
 											
@@ -2251,7 +2254,7 @@ public class ConsumerInstrumentController {
 								String devEUI=json.get("devEUI").toString().trim();
 								
 								/*For Downlink queue checkout*/																	
-								 try {										   
+								 /*try {										   
 									   String urlQueue="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue";
 										logger.debug("urlQueue ",urlQueue);
 										URL urlQ = new URL(urlQueue);
@@ -2292,7 +2295,7 @@ public class ConsumerInstrumentController {
 													 JSONObject jsObj = (JSONObject) arrJ.get(k);
 													 logger.debug("jsonObj Downink GET",jsObj);
 													 
-													/*Deletion queue started*/ 
+													Deletion queue started 
 													 try{
 														 String deleteURL="https://139.59.14.31:8080/api/nodes/"+devEUI+"/queue/"+jsObj.get("id").toString();
 															logger.debug("Delete URLConn",deleteURL);
@@ -2315,7 +2318,7 @@ public class ConsumerInstrumentController {
 														 e.printStackTrace();
 													 }
 													 
-													 /*Deletion queue ended*/ 
+													 Deletion queue ended 
 													
 												 }
 									        }
@@ -2323,7 +2326,7 @@ public class ConsumerInstrumentController {
 										
 								   }catch(Exception e){
 										e.printStackTrace();
-								   }
+								   }*/
 							/*End downlink queue checkout*/
 								
 								String strFport=json.get("fPort").toString().trim();

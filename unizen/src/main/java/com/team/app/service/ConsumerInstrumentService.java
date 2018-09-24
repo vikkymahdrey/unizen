@@ -42,6 +42,10 @@ public interface ConsumerInstrumentService {
 	public LoraFrame getNamingPacket1(String deviceId, String devEUI)throws Exception;
 	public void deleteDevEUI(String appId, String devEUI)throws Exception;
 	public List<LoraFrame> getDevEUIByAppId(String appId)throws Exception;
+	public boolean getLoraFrameFlagStatus(String devEUI, String deviceId)throws Exception;
+	public void setLoraFrameFlagStatusForLed1(String devEUI, String deviceId, String led1)throws Exception;
+	public void setLoraFrameFlagStatusForLed2(String devEUI, String deviceId, String led2)throws Exception;
+	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4)throws Exception;
 	
 	
 	

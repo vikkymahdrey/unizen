@@ -77,6 +77,9 @@ public interface FrameDao extends JpaRepository<LoraFrame, Serializable> {
 
 	@Query("Select f from LoraFrame f where f.applicationID=:applicationID group by f.devEUI")
 	List<LoraFrame> getDevEUIByAppId(@Param("applicationID") String applicationID);
+
+	@Query(value="Select * from lora_frames f where f.devEUI=?1 and f.DeviceId=?2  ORDER BY id DESC LIMIT 1",nativeQuery = true)
+	LoraFrame getLoraFrameFlagStatus(@Param("devEUI") String devEUI,@Param("deviceId") String deviceId);
 	
 	
 
