@@ -49,19 +49,54 @@ public class LoraFrame extends BaseEntityInfo implements Serializable {
 
 	private String led4;
 	
-	@Column(name="flag")
-	private boolean flag;
+	@Column(name="flagled1")
+	private boolean flagled1;
 	
-	
-	
-	
-	public boolean isFlag() {
-		return flag;
+	public boolean isFlagled1() {
+		return flagled1;
 	}
 
-	public void setFlag(boolean flag) {
-		this.flag = flag;
+	public void setFlagled1(boolean flagled1) {
+		this.flagled1 = flagled1;
 	}
+
+	public boolean isFlagled2() {
+		return flagled2;
+	}
+
+	public void setFlagled2(boolean flagled2) {
+		this.flagled2 = flagled2;
+	}
+
+	public boolean isFlagled3() {
+		return flagled3;
+	}
+
+	public void setFlagled3(boolean flagled3) {
+		this.flagled3 = flagled3;
+	}
+
+	public boolean isFlagled4() {
+		return flagled4;
+	}
+
+	public void setFlagled4(boolean flagled4) {
+		this.flagled4 = flagled4;
+	}
+
+	@Column(name="flagled2")
+	private boolean flagled2;
+	
+	@Column(name="flagled3")
+	private boolean flagled3;
+	
+	@Column(name="flagled4")
+	private boolean flagled4;
+	
+	
+	
+	
+	
 
 	private String peripheral;
 	private String central;

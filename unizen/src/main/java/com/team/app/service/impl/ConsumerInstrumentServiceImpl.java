@@ -275,11 +275,23 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 	public boolean getLoraFrameFlagStatus(String devEUI, String deviceId) throws Exception {
 		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
 		if(frm!=null){
-			if(!frm.isFlag()){
-				frm.setFlag(true);
+			if(!frm.isFlagled1()){
+				frm.setFlagled1(true);
 				frameDao.save(frm);
 				return false;
-			}else{
+			}else if(!frm.isFlagled2()){
+				frm.setFlagled2(true);
+				frameDao.save(frm);
+				return false;
+			}else if(!frm.isFlagled3()){
+				frm.setFlagled3(true);
+				frameDao.save(frm);
+				return false;
+			}else if(!frm.isFlagled4()){
+				frm.setFlagled4(true);
+				frameDao.save(frm);
+				return false;
+			}else {
 				return true;
 			}
 			
@@ -295,8 +307,8 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 	public void setLoraFrameFlagStatusForLed1(String devEUI, String deviceId,String led1) throws Exception {
 		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
 		if(frm!=null){
-			if(frm.isFlag()){
-				frm.setFlag(false);
+			if(frm.isFlagled1()){
+				frm.setFlagled1(false);
 				frm.setLed1(led1);
 				frameDao.save(frm);
 			}
@@ -310,8 +322,8 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 	public void setLoraFrameFlagStatusForLed2(String devEUI, String deviceId, String led2) throws Exception {
 		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
 		if(frm!=null){
-			if(frm.isFlag()){
-				frm.setFlag(false);
+			if(frm.isFlagled2()){
+				frm.setFlagled2(false);
 				frm.setLed2(led2);
 				frameDao.save(frm);
 			}
@@ -322,14 +334,21 @@ public class ConsumerInstrumentServiceImpl implements ConsumerInstrumentService 
 
 
 
-	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4) throws Exception {
+	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4,String flag) throws Exception {
 		LoraFrame frm=frameDao.getLoraFrameFlagStatus(devEUI, deviceId);
 		if(frm!=null){
-			if(frm.isFlag()){
-				frm.setFlag(false);
-				frm.setLed3(led3);
-				frm.setLed4(led4);
-				frameDao.save(frm);
+			if(flag.equals("led3")){
+				if(frm.isFlagled3()){
+					frm.setFlagled3(false);
+					frm.setLed3(led3);
+					frameDao.save(frm);
+				}
+			}else if(flag.equals("led4")){
+				if(frm.isFlagled4()){
+					frm.setFlagled4(false);
+					frm.setLed4(led4);
+					frameDao.save(frm);
+				}
 			}
 		}
 	}

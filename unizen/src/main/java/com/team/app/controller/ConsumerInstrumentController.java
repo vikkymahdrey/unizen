@@ -2103,7 +2103,7 @@ public class ConsumerInstrumentController {
 				
 		try{			
 
-			if( obj.get("devices").toString()!=null && !obj.get("devices").toString().isEmpty()){
+			if(obj.get("devices").toString()!=null && !obj.get("devices").toString().isEmpty()){
     					
     				logger.debug("devices for /setDownlinkOnLED1 :",obj.get("devices").toString());
     			
@@ -2133,7 +2133,8 @@ public class ConsumerInstrumentController {
 												!json.get("led3").toString().isEmpty() && json.get("led3").toString()!=null && 
 														!json.get("led4").toString().isEmpty() && json.get("led4").toString()!=null && 
 													!json.get("devEUI").toString().isEmpty() && json.get("devEUI").toString()!=null && 
-														!json.get("fPort").toString().isEmpty() && json.get("fPort").toString()!=null){
+														!json.get("fPort").toString().isEmpty() && json.get("fPort").toString()!=null &&
+															!json.get("flag").toString().isEmpty() && json.get("flag").toString()!=null){
 										
 																						
 											logger.debug("/deviceId printing ",jObj.get("deviceId").toString());
@@ -2142,7 +2143,7 @@ public class ConsumerInstrumentController {
 											logger.debug("/devEUI printing ",jObj.get("devEUI").toString());
 											logger.debug("/fPort printing ",jObj.get("fPort").toString());
 											
-											consumerInstrumentServiceImpl.setLoraFrameFlagStatusForLed34(json.get("devEUI").toString(),jObj.get("deviceId").toString(),json.get("led3").toString(),json.get("led4").toString());
+											consumerInstrumentServiceImpl.setLoraFrameFlagStatusForLed34(json.get("devEUI").toString(),jObj.get("deviceId").toString(),json.get("led3").toString(),json.get("led4").toString(),json.get("flag").toString());
 											String led3=json.get("led3").toString();
 											String led4=json.get("led4").toString();
 											

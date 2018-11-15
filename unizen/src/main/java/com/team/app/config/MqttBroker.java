@@ -752,7 +752,10 @@ public class MqttBroker implements MqttCallback,MqttIntrf {
 							     		 			 frame.setUpdatedAt(new Date(System.currentTimeMillis()));							     		 			 
 							     		 			 boolean flagStatus=consumerInstrumentServiceImpl.getLoraFrameFlagStatus(frame.getDevEUI(),frame.getDeviceId());
 							     		 			 if(flagStatus){
-							     		 				frame.setFlag(true);
+							     		 				frame.setFlagled1(true);
+							     		 				frame.setFlagled2(true);
+							     		 				frame.setFlagled3(true);
+							     		 				frame.setFlagled4(true);
 							     		 				LoraFrame lfrm=frameDao.save(frame);
 								     		 			 if(lfrm!=null){
 								     		 				logger.debug("Frame frame updated IF : ",lfrm.getId()); 

@@ -45,7 +45,7 @@ public interface ConsumerInstrumentService {
 	public boolean getLoraFrameFlagStatus(String devEUI, String deviceId)throws Exception;
 	public void setLoraFrameFlagStatusForLed1(String devEUI, String deviceId, String led1)throws Exception;
 	public void setLoraFrameFlagStatusForLed2(String devEUI, String deviceId, String led2)throws Exception;
-	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4)throws Exception;
+	public void setLoraFrameFlagStatusForLed34(String devEUI, String deviceId, String led3, String led4, String flag)throws Exception;
 	
 	
 	
